@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>거창대성고 우산 대여 시스템</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px; /* 너비 설정 */
+        }
+        .form-container select, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #4cae4c;
+        }
+        h2 {
+            text-align: center;
+        }
+        #message {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>거창대성고 우산 대여 시스템</h2>
+        <label for="numberSelect">번호를 선택하세요 (1-12):</label>
+        <select id="numberSelect">
+            <option value="" disabled selected>번호 선택</option>
+            <script>
+                for (let i = 1; i <= 12; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+        <button id="rentButton" onclick="rent()">대여</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function rent() {
+            const select = document.getElementById('numberSelect');
+            const selectedValue = select.value;
+            const message = document.getElementById('message');
+
+            if (selectedValue) {
+                const today = new Date(); // 현재 날짜
+                const returnDate = new Date(today);
+                returnDate.setDate(today.getDate() + 1); // 하루 뒤 날짜 설정
+
+                const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                const formattedToday = today.toLocaleDateString('ko-KR', options); // 오늘 날짜 형식
+                const formattedReturnDate = returnDate.toLocaleDateString('ko-KR', options); // 반납 날짜 형식
+
+                message.innerText = `${selectedValue}번을(를) 대여했습니다!\n빌린 날짜: ${formattedToday}\n반납 날짜: ${formattedReturnDate}`;
+            } else {
+                message.innerText = '번호를 선택해주세요!';
+            }
+        }
+    </script>
+
+</body>
+</html>
