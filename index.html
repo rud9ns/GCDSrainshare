@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>거창대성고 우산 대여 시스템</title>
+    <title>간단한 로그인 폼</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,7 +44,7 @@
 
     <div class="form-container">
         <h2>거창대성고 우산 대여 시스템</h2>
-        <form id="loginForm">
+        <form id="loginForm" onsubmit="return validateForm()">
             <label for="username">학번:</label>
             <input type="text" id="username" placeholder="학번을 입력하세요" required>
 
@@ -54,6 +54,26 @@
             <button type="submit">로그인</button>
         </form>
     </div>
+
+    <script>
+        function validateForm() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // 여기에 사용자의 ID와 비밀번호를 설정합니다.
+            const validUsername = '2102'; // 예시 학번
+            const validPassword = '2102'; // 예시 비밀번호
+
+            // 입력값이 일치하는지 확인합니다.
+            if (username === validUsername && password === validPassword) {
+                window.location.href = 'select.html'; // 일치할 경우 select.html로 이동
+                return false; // 폼 제출 방지
+            } else {
+                alert('학번 또는 비밀번호가 일치하지 않습니다.'); // 오류 메시지
+                return false; // 폼 제출 방지
+            }
+        }
+    </script>
 
 </body>
 </html>
